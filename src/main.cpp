@@ -2,9 +2,11 @@
 #include <fstream>
 #include "patientmodule.h"
 #include "sqlite3.h"
+#include "doctormodule.h"
+#include "hospitalmanagement.h"
 using namespace std;
 
-void check_setup(void);
+
 
 int main(){
     cout<<R"(
@@ -30,15 +32,21 @@ ___  ___ ___  _   _  ___  _____ ________  ________ _   _ _____
 \____/  \_/ \____/  \_/ \____/\_|  |_/                         
                                                                
     )";
-    check_setup();
     int module;
-    cout<<"MODULE \n1.patient management";
+    cout<<"MODULE \n1.patient management \n2.Doctors Menu \n3.hospital management \n4.exit";
     cout<<"\nenter module: ";cin>>module;
     while(module!=3){
         switch(module){
             case 1:
                 patienthandler();
                 break;
+            case 2:
+                doctorHandler();
+                break;
+            case 3:
+                managementhandler();
+                break;
+                
 
         }
         cout<<"\nenter module: ";cin>>module;
@@ -46,24 +54,4 @@ ___  ___ ___  _   _  ___  _____ ________  ________ _   _ _____
 
 
     return 0;
-}
-void check_setup(void){
-    string filename = "data.txt";
-    ifstream file(filename);
-    if (file) {
-        return;
-    } else {
-        ofstream outfile(filename);
-        if (outfile.is_open()){
-            int n,icu,op;
-            cout<<"INITIAL SETUP "<<endl;
-            cout<<"Enter the number of beds: ";cin>>n;
-            cout<<"Enter the number of icu: ";cin>>icu;
-            cout<<"Enter the number of operation theatre: ";cin>>op;
-            outfile<<n<<endl;
-            outfile<<icu<<endl;
-            outfile<<op<<endl;outfile.close();cout<<"SETUP COMPLETED";
-
-        }
-    }
 }

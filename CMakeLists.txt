@@ -8,6 +8,8 @@ add_library(sqlite3 STATIC lib/sqlite3.c)
 set(SOURCES
     ${CMAKE_SOURCE_DIR}/src/main.cpp
     ${CMAKE_SOURCE_DIR}/src/patientmodule.cpp
+    ${CMAKE_SOURCE_DIR}/src/doctormodule.cpp
+    ${CMAKE_SOURCE_DIR}/src/hospitalmanagement.cpp
 )
 
 # Add the executable (the main program to be built)
