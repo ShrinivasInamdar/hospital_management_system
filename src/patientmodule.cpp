@@ -298,6 +298,7 @@ void patienthandler( void) {
     while (true){
         int choice;
         Patient p1;int a,b;
+        cout<<"==PATIENT MANAGEMENT=="<<endl;
         cout<<"\n1.add Patient \n2.select patient \n3.display all \n4.update status \n5.exit"<<endl;
         cout<<"enter choice: ";cin>>choice;
         if (choice==5){

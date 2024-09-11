@@ -96,27 +96,43 @@ bool insertDoctor(sqlite3* db, const Doctor& doctor) {
 
 // Function to display all doctors
 void displayAllDoctors(sqlite3* db) {
-    const char* sqlAllDoctors = "SELECT * FROM Doctor;";
+    const char* sqlAllDoctors = "SELECT DoctorID, Name, Specialization FROM Doctor;";
     sqlite3_stmt* stmtAllDoctors;
 
+    // Check if the database connection is valid
+    if (!db) {
+        cerr << "Database connection is null!" << endl;
+        return;
+    }
+
     // Prepare the SQL statement for fetching all doctors
-    if (sqlite3_prepare_v2(db, sqlAllDoctors, -1, &stmtAllDoctors, nullptr) != SQLITE_OK) {
+    int rc = sqlite3_prepare_v2(db, sqlAllDoctors, -1, &stmtAllDoctors, nullptr);
+    if (rc != SQLITE_OK) {
         cerr << "Failed to prepare statement for all doctors: " << sqlite3_errmsg(db) << endl;
         return;
     }
 
+    // Check if any rows are returned
+    bool doctorsFound = false;
+
     // Iterate through each doctor record
     while (sqlite3_step(stmtAllDoctors) == SQLITE_ROW) {
+        doctorsFound = true;
         // Retrieve doctor details
         int doctorId = sqlite3_column_int(stmtAllDoctors, 0);
-        string name(reinterpret_cast<const char*>(sqlite3_column_text(stmtAllDoctors, 1)));
-        string specialization(reinterpret_cast<const char*>(sqlite3_column_text(stmtAllDoctors, 2)));
+        const char* name = reinterpret_cast<const char*>(sqlite3_column_text(stmtAllDoctors, 1));
+        const char* specialization = reinterpret_cast<const char*>(sqlite3_column_text(stmtAllDoctors, 2));
 
         // Display the doctor information
         cout << "Doctor ID: " << doctorId << endl;
-        cout << "Name: " << name << endl;
-        cout << "Specialization: " << specialization << endl;
+        cout << "Name: " << (name ? name : "N/A") << endl;
+        cout << "Specialization: " << (specialization ? specialization : "N/A") << endl;
         cout << "-----------------------------------" << endl;
+    }
+
+    // If no doctors were found
+    if (!doctorsFound) {
+        cout << "No doctors found in the database." << endl;
     }
 
     // Finalize the statement
@@ -177,7 +193,7 @@ void doctorHandler() {
         int choice;
         cout << "\nDoctor Panel:" << endl;
         cout << "1. Add Doctor" << endl;
-        cout << "2. Assign Patient to Doctor" << endl;
+        cout << "2. Delete Doctor" << endl;
         cout << "3. Display All Doctors" << endl;
         cout << "4. Search Doctor" << endl;
         cout << "5. Exit" << endl;
@@ -213,7 +229,7 @@ void doctorHandler() {
                     cout << "Doctor found: " << doctor->doctorName << endl;
 
                     // Assign a patient to this doctor
-                    cout << "Assign a patient to this doctor." << endl;
+                    cout << "Assign a docotor to this patients." << endl;
                     patienthandler();
                     // Assuming patienthandler will return a Patient object
                     // doctor->assignPatientToDoctor(patient);
