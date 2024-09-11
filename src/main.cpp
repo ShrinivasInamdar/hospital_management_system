@@ -35,7 +35,7 @@ ___  ___ ___  _   _  ___  _____ ________  ________ _   _ _____
     int module;
     cout<<"MODULE \n1.patient management \n2.Doctors Menu \n3.hospital management \n4.exit";
     cout<<"\nenter module: ";cin>>module;
-    while(module!=3){
+    while(module!=4){
         switch(module){
             case 1:
                 patienthandler();
@@ -49,6 +49,8 @@ ___  ___ ___  _   _  ___  _____ ________  ________ _   _ _____
                 
 
         }
+        cout<<"MODULE \n1.patient management \n2.Doctors Menu \n3.hospital management \n4.exit";
+
         cout<<"\nenter module: ";cin>>module;
     }
 

@@ -144,6 +144,7 @@ void displayResources() {
 }
 void managementhandler() {
     int choice;
+    check_setup();
 
     do {
         // Displaying the menu options
