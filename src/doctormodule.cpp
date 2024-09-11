@@ -7,7 +7,8 @@
 
 using namespace std;
 
-sqlite3* db;
+
+
 // Doctor class to handle doctor-related tasks
 class Doctor {
 public:
@@ -29,7 +30,7 @@ public:
     }
 
     void updatePatientStatus(Patient& patient, int status) {
-        patient.set_status(status);
+        patient.set_status(status,db);
         cout << "Patient " << patient.name << "'s status updated to: " << status << endl;
     }
 

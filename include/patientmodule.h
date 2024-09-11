@@ -1,6 +1,10 @@
 #pragma once
 #include "sqlite3.h"
 #include <vector>
+#include <iostream>
+using namespace std;
+
+extern sqlite3* db;
 
 
 void patienthandler();
@@ -28,7 +32,7 @@ public:
         gender = pgender;
         address = paddress;
         }
-    void set_status(int ps){status=ps;updatePatientStatus(db,patientId,ps);}
+    void set_status(int ,sqlite3*);
     void set_doc(sqlite3* db, int pd) {
     doctorID = pd;
 

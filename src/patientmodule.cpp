@@ -7,7 +7,10 @@ using namespace std;
 
 
 
-sqlite3* db;
+void Patient::set_status(int ps,sqlite3*db){
+    status=ps;
+    updatePatientStatus(db,patientId,ps);
+}
 
 
 // Function to create both tables: Patient and MedicalHistory

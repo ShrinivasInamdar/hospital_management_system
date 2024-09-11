@@ -6,7 +6,7 @@
 #include "hospitalmanagement.h"
 using namespace std;
 
-
+sqlite3* db = nullptr;
 
 int main(){
     cout<<R"(
