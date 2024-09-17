@@ -4,6 +4,11 @@ project(hospitalmanagement VERSION 0.1.0 LANGUAGES C CXX)
 # Add SQLite3 as a static library
 add_library(sqlite3 STATIC lib/sqlite3.c)
 
+
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD_REQUIRED ON)
+
+
 # Add the source files for the project
 set(SOURCES
     ${CMAKE_SOURCE_DIR}/src/main.cpp
